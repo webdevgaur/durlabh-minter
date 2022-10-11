@@ -2,9 +2,7 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-// import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-// import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract Durlabhs is ERC721, Ownable {
     uint256 public mintPrice;
@@ -40,18 +38,21 @@ contract Durlabhs is ERC721, Ownable {
         return "ipfs://";
     }
 
-    function safeMint(address to, string memory uri) public onlyOwner {
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
-        _setTokenURI(tokenId, uri);
+    function mintMe(uint256 _quantity) public payable {
+        require(isPublicMintEnabled, 'Minting is disabled as of this moment');
+        require(msg.value == _quantity*mintPrice, 'Incorrect amount of token sent');
+        require(totalSupply + _quantity <= maxSupply, 'Sorry, we are all sold out! :(');
+        require(walletMints[msg.sender] + _quantity <= maxPerWallet, 'Maximum limit per wallet exceeded');
+
+        for(uint256 i = 0; i < _quantity; i++) {
+            uint256 newTokenId = totalSupply + 1;
+            totalSupply++;
+            _safeMint(msg.sender, newTokenId);
+        }
     }
 
     // The following functions are overrides required by Solidity.
 
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
-        super._burn(tokenId);
-    }
 
     function tokenURI(uint256 _tokenId)
         public
@@ -59,6 +60,12 @@ contract Durlabhs is ERC721, Ownable {
         override
         returns (string memory)
     {
-        return super.tokenURI(tokenId);
+        require(_exists(_tokenId), 'This token ID does not exist.');
+        return string(abi.encodePacked(baseTokenUri, Strings.toString(_tokenId), '.json'));
+    }
+
+    function withdraw() external onlyOwner {
+        (bool success, ) = withdrawWallet.call{ value: address(this).balance }('');
+        require(success, 'Withdrawal failed.');
     }
 }
