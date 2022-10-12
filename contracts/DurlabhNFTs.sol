@@ -4,7 +4,7 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Durlabhs is ERC721, Ownable {
+contract DurlabhNFTs is ERC721, Ownable {
     uint256 public mintPrice;
     uint256 public totalSupply;
     uint256 public maxSupply;
@@ -18,7 +18,7 @@ contract Durlabhs is ERC721, Ownable {
 
     //Counters.Counter private _tokenIdCounter;
 
-    constructor() payable ERC721("Durlabhs", "DRLBH") {
+    constructor() payable ERC721("DurlabhNFTs", "DRLBH") {
         mintPrice = 0.02 ether;
         totalSupply = 0;
         maxSupply = 25;

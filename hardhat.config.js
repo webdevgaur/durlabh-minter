@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("@nomiclabs/hardhat-etherscan");
 require('dotenv').config();
 
 const GOERLI_URL = process.env.STAGE_URL;
