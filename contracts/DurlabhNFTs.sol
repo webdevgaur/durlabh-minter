@@ -14,16 +14,16 @@ contract Durlabhs is ERC721, Ownable {
     address payable public withdrawWallet;
     mapping(address => uint256) public walletMints;
 
-    using Counters for Counters.Counter;
+    //using Counters for Counters.Counter;
 
-    Counters.Counter private _tokenIdCounter;
+    //Counters.Counter private _tokenIdCounter;
 
     constructor() payable ERC721("Durlabhs", "DRLBH") {
         mintPrice = 0.02 ether;
         totalSupply = 0;
         maxSupply = 25;
         maxPerWallet = 5;
-        withdrawWallet = 0x5A01f5a6297200c0d9B38450C5C15Ba96557243A;
+        withdrawWallet = payable(0x5A01f5a6297200c0d9B38450C5C15Ba96557243A);
     }
 
     function setIsPublicMintEnabled(bool _isPublicMintEnabled) external onlyOwner {
