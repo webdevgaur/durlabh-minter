@@ -1,13 +1,16 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
+import MainMint from './components/MainMint';
+import NavBar from './components/NavBar';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [accounts, setAccounts] = useState([]);
 
   return (
     <div className="App">
-      Hello ji
+      <h1>test</h1>
+      <NavBar accounts={accounts} setAccounts={setAccounts} />
+      <MainMint accounts={accounts} setAccounts={setAccounts} />
     </div>
   )
 }
