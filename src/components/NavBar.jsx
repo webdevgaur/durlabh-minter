@@ -10,13 +10,28 @@ const NavBar = ({ accounts, setAccounts }) => {
             });
             setAccounts(accounts);
         }
-    }
+    };
 
     return(
-        <>
-            <h1>NavBar works!</h1>
-        </>
+        <nav>
+            {/* Left side of the navbar */}
+            <div>Twitter</div>
+            <div>LinkedIn</div>
+            <div>Email</div>
+
+            {/* Right side of the navbar */}
+            <div>About</div>
+            <div>Mint</div>
+            <div>Team</div>
+
+            {/* Connect wallet */}
+            {isConnected ? (
+                <p>Connected 👍</p>
+            ) : (
+                <button onClick={connectAccount}>Connect 🤝</button>
+            )}
+        </nav>
     );
-}
+};
 
 export default NavBar

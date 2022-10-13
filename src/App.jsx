@@ -1,14 +1,14 @@
 import { useState } from 'react'
+import reactLogo from './assets/react.svg'
 import './App.css'
+import NavBar from './components/NavBar'
 import MainMint from './components/MainMint';
-import NavBar from './components/NavBar';
 
 function App() {
   const [accounts, setAccounts] = useState([]);
 
   return (
     <div className="App">
-      <h1>test</h1>
       <NavBar accounts={accounts} setAccounts={setAccounts} />
       <MainMint accounts={accounts} setAccounts={setAccounts} />
     </div>
