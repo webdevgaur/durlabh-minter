@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Laila&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap');
+
+.App {
+    text-align: center;
+    font-family: "Source Sans Pro", "Laila";
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+}
+
+.overlay {
+    
+}

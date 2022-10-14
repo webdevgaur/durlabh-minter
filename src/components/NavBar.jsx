@@ -1,4 +1,6 @@
 import React from "react";
+import { Box, Button, Flex, Image, Link, Spacer } from "@chakra-ui/react"
+import { AiFillTwitterCircle, AiFillYoutube, AiFillLinkedin, AiFillMail } from "react-icons/ai";
 
 const NavBar = ({ accounts, setAccounts }) => {
     const isConnected = Boolean(accounts[0]);
@@ -9,13 +11,19 @@ const NavBar = ({ accounts, setAccounts }) => {
                 method: 'eth_requestAccounts',
             });
             setAccounts(accounts);
+        } else {
+            alert('Crypto wallet not installed. Install metamask.');
         }
     };
 
     return(
-        <nav>
+        <Flex justify="space-between" align="center" padding="30px">
+            
             {/* Left side of the navbar */}
-            <div>Twitter</div>
+            <Link href="https://twitter.com/webdevgaur" target="_blank" rel="noopener noreferrer">
+                <AiFillTwitterCircle className="link-icon twitter" />
+            </Link>
+            <div>YouTube</div>
             <div>LinkedIn</div>
             <div>Email</div>
 
@@ -30,7 +38,8 @@ const NavBar = ({ accounts, setAccounts }) => {
             ) : (
                 <button onClick={connectAccount}>Connect 🤝</button>
             )}
-        </nav>
+           
+        </Flex>
     );
 };
 
